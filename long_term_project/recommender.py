@@ -69,8 +69,8 @@ if __name__ == '__main__':
     test_file_name = sys.argv[2]
 
     columns = ['user_id', 'item_id', 'rating', 'time_stamp']
-    base_file = pd.read_csv('./data/u1.base', sep='\t', names=columns)
-    test_file = pd.read_csv('./data/u1.test', sep='\t', names=columns)
+    base_file = pd.read_csv(base_file_name, sep='\t', names=columns)
+    test_file = pd.read_csv(test_file_name, sep='\t', names=columns)
 
     user_item_list = base_file.drop('time_stamp', axis=1)    
     test_rating = test_file['rating'].values
@@ -89,8 +89,5 @@ if __name__ == '__main__':
         else:
             result.append(get_user_rating_avg(user_item_rating, user_id))
 
-    
-    
-    
     test_user_item_list['rating'] = result
     test_user_item_list.to_csv(f'{base_file_name}_prediction.txt', sep='\t', index=False, header=False)
